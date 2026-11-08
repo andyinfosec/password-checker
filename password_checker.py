@@ -50,7 +50,7 @@ def check_strength(password):
 
 def feedback(password):
     if check_common(password): # Returns warning if identified in common password list
-        return "Password identified in common list. Score: 0"
+        return "\nPassword identified in common list. Score: 0"
 
     strength, score = check_strength(password) # Returns the strength and score of given password
     feedback = f"\n| Strength: {strength} | Score: {score}/7\n"
@@ -69,11 +69,31 @@ def feedback(password):
         if not any(c.isdigit() for c in password):
             feedback += "   -Include numbers  (1, 2, 3, ect)\n"
                 
-user_input = input("Enter password or 'q' to quit: ")
-print("\n")
 
-while user_input != 'q':
-    password = user_input
-    print(feedback(password))
-    user_input = input("Enter password or 'q' to quit: ")
-    print("\n")
+    return feedback
+        
+
+def handle_input():
+    user_input = input("Enter a password between 1 and 64 characters or type 'q' to quit: ")
+    if user_input == 'q':
+        quit()
+    while True:
+        length = len(user_input)
+        if 0 <  length <= 64:
+            password = user_input
+            print(feedback(password))
+            break
+        elif length == 0:
+            print("Input cannot be empty.")
+            break
+        else:
+            break
+        break
+    
+   
+def run():
+    while True:
+        handle_input()
+
+
+run()
