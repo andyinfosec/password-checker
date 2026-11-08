@@ -1,0 +1,7 @@
+{
+	"rules":
+	{
+		"min_length": 8,
+		"max_length": 64
+	}
+}

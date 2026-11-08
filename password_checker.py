@@ -1,5 +1,5 @@
-import string
-
+import string, json
+from config import RULES
 # Checks to see if user password is commonly used. File is part of a collection on the SecLists github
 
 def check_common(password):
@@ -71,15 +71,16 @@ def feedback(password):
                 
 
     return feedback
-        
+    
+# Validates that user has inputed a password of valid length and field is not null    
 
 def handle_input():
-    user_input = input("Enter a password between 1 and 64 characters or type 'q' to quit: ")
+    user_input = input(f"Enter a password between {RULES.MIN_LENGTH} and {RULES.MAX_LENGTH} characters or type 'q' to quit: ")
     if user_input == 'q':
         quit()
     while True:
         length = len(user_input)
-        if 0 <  length <= 64:
+        if RULES.MIN_LENGTH < length <= RULES.MAX_LENGTH:
             password = user_input
             print(feedback(password))
             break
@@ -94,6 +95,4 @@ def handle_input():
 def run():
     while True:
         handle_input()
-
-
 run()
